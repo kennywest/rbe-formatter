@@ -61,7 +61,7 @@ public final class RBEPreferenceInitializer {
         RBEPreferences.setDefault(RBEPreferences.NEW_LINE_TYPE,
                 RBEPreferences.NEW_LINE_UNIX);
 
-        RBEPreferences.setDefault(RBEPreferences.KEEP_EMPTY_FIELDS, false);
+        RBEPreferences.setDefault(RBEPreferences.KEEP_EMPTY_FIELDS, true);
 
         // Reporting/Performance
         RBEPreferences.setDefault(RBEPreferences.REPORT_MISSING_VALUES, true);
