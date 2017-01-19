@@ -1,22 +1,17 @@
 /*
- * Copyright (C) 2003, 2004  Pascal Essiembre, Essiembre Consultant Inc.
- * 
- * This file is part of Essiembre ResourceBundle Editor.
- * 
- * Essiembre ResourceBundle Editor is free software; you can redistribute it 
- * and/or modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- * 
- * Essiembre ResourceBundle Editor is distributed in the hope that it will be 
- * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with Essiembre ResourceBundle Editor; if not, write to the 
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA  02111-1307  USA
+ * Copyright (C) 2003-2014  Pascal Essiembre
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.essiembre.eclipse.rbe.model.bundle;
 
@@ -32,8 +27,7 @@ import java.util.TreeSet;
 
 /**
  * Representation of a properties file, specific to ResourceBundle editor.
- * @author Pascal Essiembre (essiembre@users.sourceforge.net)
- * @version $Author: nl_carnage $ $Revision: 1.5 $ $Date: 2007/09/11 16:19:05 $
+ * @author Pascal Essiembre
  */
 public class Bundle implements IBundleVisitable {
 
@@ -42,7 +36,7 @@ public class Bundle implements IBundleVisitable {
     /** Bundle locale. */
     private Locale locale;
     /** Bundle entries (key=key value=BundleEntry). */
-    private final Map entries = new HashMap();
+    private final Map<String, BundleEntry> entries = new HashMap<>();
     /** Bundle group (parent). */
     private BundleGroup bundleGroup;
     
@@ -57,9 +51,9 @@ public class Bundle implements IBundleVisitable {
      * @see IBundleVisitable#accept(IBundleVisitor, Object)
      */
     public void accept(IBundleVisitor visitor, Object passAlongArgument) {
-        for (Iterator iter = entries.values().iterator(); iter.hasNext();) {
-            visitor.visitBundleEntry(
-                    (BundleEntry) iter.next(), passAlongArgument);
+        for (Iterator<BundleEntry> iter = 
+                entries.values().iterator(); iter.hasNext();) {
+            visitor.visitBundleEntry(iter.next(), passAlongArgument);
         }
         visitor.visitBundle(this, passAlongArgument);
         visitor.visitBundleGroup(bundleGroup, passAlongArgument);
@@ -190,7 +184,7 @@ public class Bundle implements IBundleVisitable {
      * Iterates through the <code>BundleEntry</code> objects in this bundle.
      * @return an iterator
      */
-    public Iterator iterator() {
+    public Iterator<BundleEntry> iterator() {
         return entries.values().iterator();
     }
 
@@ -228,22 +222,23 @@ public class Bundle implements IBundleVisitable {
         setComment(bundle.getComment());
         // Remove deleted entries
         synchronized (entries) {
-            List entriesToRemove = new ArrayList();
-            for (Iterator iter = iterator(); iter.hasNext();) {
-                BundleEntry localEntry = (BundleEntry) iter.next();
+            List<BundleEntry> entriesToRemove = new ArrayList<>();
+            for (Iterator<BundleEntry> iter = iterator(); iter.hasNext();) {
+                BundleEntry localEntry = iter.next();
                 if (bundle.getEntry(localEntry.getKey()) == null) {
                     entriesToRemove.add(localEntry);
                 }
             }    
-            for (Iterator iter = entriesToRemove.iterator(); iter.hasNext();) {
-                BundleEntry entry = (BundleEntry) iter.next();
+            for (Iterator<BundleEntry> iter = 
+                    entriesToRemove.iterator(); iter.hasNext();) {
+                BundleEntry entry = iter.next();
                 removeEntry(entry);
             }        
         }
         
         // Add existing/new entries
-        for (Iterator iter = bundle.iterator(); iter.hasNext();) {
-            BundleEntry entry = (BundleEntry) iter.next();
+        for (Iterator<BundleEntry> iter = bundle.iterator(); iter.hasNext();) {
+            BundleEntry entry = iter.next();
             addEntry(entry);
         }
     }

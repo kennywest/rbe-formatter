@@ -1,30 +1,25 @@
 /*
- * Copyright (C) 2003, 2004  Pascal Essiembre, Essiembre Consultant Inc.
- * 
- * This file is part of Essiembre ResourceBundle Editor.
- * 
- * Essiembre ResourceBundle Editor is free software; you can redistribute it 
- * and/or modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- * 
- * Essiembre ResourceBundle Editor is distributed in the hope that it will be 
- * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with Essiembre ResourceBundle Editor; if not, write to the 
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA  02111-1307  USA
+ * Copyright (C) 2003-2014  Pascal Essiembre
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.essiembre.eclipse.rbe.model.bundle;
 
 /**
  * Objects implementing this interface can act as a visitor to any 
  * bundle-related resource implementing <code>IBundleVisitable</code>.
- * @author Pascal Essiembre (essiembre@users.sourceforge.net)
- * @version $Author: nl_carnage $ $Revision: 1.3 $ $Date: 2007/09/11 16:11:10 $
+ * @author Pascal Essiembre
+ * @author Tobias Langner
  */
 public interface IBundleVisitor {
     /**

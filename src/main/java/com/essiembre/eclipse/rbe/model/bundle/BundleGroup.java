@@ -1,22 +1,17 @@
 /*
- * Copyright (C) 2003, 2004  Pascal Essiembre, Essiembre Consultant Inc.
- * 
- * This file is part of Essiembre ResourceBundle Editor.
- * 
- * Essiembre ResourceBundle Editor is free software; you can redistribute it 
- * and/or modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- * 
- * Essiembre ResourceBundle Editor is distributed in the hope that it will be 
- * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with Essiembre ResourceBundle Editor; if not, write to the 
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA  02111-1307  USA
+ * Copyright (C) 2003-2014  Pascal Essiembre
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.essiembre.eclipse.rbe.model.bundle;
 
@@ -25,21 +20,16 @@ import java.util.*;
 
 /**
  * Represents all properties files part of the same "family".
- *
- * @author Pascal Essiembre (essiembre@users.sourceforge.net)
- * @version $Author: nl_carnage $ $Revision: 1.8 $ $Date: 2007/09/11 16:11:09 $
+ * @author Pascal Essiembre
+ * @author Tobias Langner
  */
 public class BundleGroup implements IBundleVisitable {
 
-    /**
-     * Bundles forming the group (key=Locale; value=Bundle).
-     */
-    private final Map<Locale, Bundle> bundles = new HashMap();
-
-    //TODO tentative:
+    /** Bundles forming the group (key=Locale; value=Bundle). */
+    private final Map<Locale, Bundle> bundles = new HashMap<>();
+    
     private final SortedSet<String> keys = new TreeSet<String>();
-//	private final List<String> keys = new LinkedList<String>();
-
+    
     /**
      * Constructor.
      */
@@ -52,9 +42,8 @@ public class BundleGroup implements IBundleVisitable {
      */
     public void accept(IBundleVisitor visitor, Object passAlongArgument) {
         for (Bundle bundle : bundles.values()) {
-            for (Iterator j = bundle.iterator(); j.hasNext(); ) {
-                visitor.visitBundleEntry(
-                        (BundleEntry) j.next(), passAlongArgument);
+            for (Iterator<BundleEntry> j = bundle.iterator(); j.hasNext();) {
+                visitor.visitBundleEntry(j.next(), passAlongArgument);
             }
             visitor.visitBundle(bundle, passAlongArgument);
         }
@@ -127,8 +116,9 @@ public class BundleGroup implements IBundleVisitable {
      * @param key
      */
     public void addKey(String key) {
-        for (Iterator iter = bundles.keySet().iterator(); iter.hasNext(); ) {
-            Locale locale = (Locale) iter.next();
+        for (Iterator<Locale> iter = bundles.keySet().iterator(); 
+                iter.hasNext();) {
+            Locale locale = iter.next();
             BundleEntry entry = new BundleEntry(key, null, null);
             addBundleEntry(locale, entry);
         }
@@ -145,8 +135,9 @@ public class BundleGroup implements IBundleVisitable {
         if (oldKey.equals(newKey)) {
             return;
         }
-        for (Iterator iter = bundles.keySet().iterator(); iter.hasNext(); ) {
-            Locale locale = (Locale) iter.next();
+        for (Iterator<Locale> iter = bundles.keySet().iterator(); 
+                iter.hasNext();) {
+            Locale locale = iter.next();
             Bundle bundle = getBundle(locale);
             BundleEntry entry = getBundleEntry(locale, oldKey);
             if (entry != null) {
@@ -163,8 +154,9 @@ public class BundleGroup implements IBundleVisitable {
      * @param key key to comment
      */
     public void commentKey(String key) {
-        for (Iterator iter = bundles.keySet().iterator(); iter.hasNext(); ) {
-            Locale locale = (Locale) iter.next();
+        for (Iterator<Locale> iter = bundles.keySet().iterator(); 
+                iter.hasNext();) {
+            Locale locale = iter.next();
             Bundle bundle = getBundle(locale);
             BundleEntry entry = getBundleEntry(locale, key);
             if (entry != null) {
@@ -179,8 +171,9 @@ public class BundleGroup implements IBundleVisitable {
      * @param key key to comment
      */
     public void uncommentKey(String key) {
-        for (Iterator iter = bundles.keySet().iterator(); iter.hasNext(); ) {
-            Locale locale = (Locale) iter.next();
+        for (Iterator<Locale> iter = bundles.keySet().iterator(); 
+                iter.hasNext();) {
+            Locale locale = iter.next();
             Bundle bundle = getBundle(locale);
             BundleEntry entry = getBundleEntry(locale, key);
             if (entry != null) {
@@ -194,14 +187,15 @@ public class BundleGroup implements IBundleVisitable {
      * the <code>newKey</code>.
      *
      * @param origKey original key
-     * @param newKey  new key
+     * @param newKey new key
      */
     public void copyKey(String origKey, String newKey) {
         if (origKey.equals(newKey)) {
             return;
         }
-        for (Iterator iter = bundles.keySet().iterator(); iter.hasNext(); ) {
-            Locale locale = (Locale) iter.next();
+        for (Iterator<Locale> iter = bundles.keySet().iterator(); 
+                iter.hasNext();) {
+            Locale locale = iter.next();
             Bundle bundle = getBundle(locale);
             BundleEntry origEntry = getBundleEntry(locale, origKey);
             if (origEntry != null) {
@@ -218,8 +212,9 @@ public class BundleGroup implements IBundleVisitable {
      * @param key key to remove
      */
     public void removeKey(String key) {
-        for (Iterator iter = bundles.keySet().iterator(); iter.hasNext(); ) {
-            Locale locale = (Locale) iter.next();
+        for (Iterator<Locale> iter = bundles.keySet().iterator(); 
+                iter.hasNext();) {
+            Locale locale = iter.next();
             Bundle bundle = getBundle(locale);
             BundleEntry entry = getBundleEntry(locale, key);
             if (entry != null) {
@@ -234,7 +229,7 @@ public class BundleGroup implements IBundleVisitable {
      * given locale.
      *
      * @param locale locale of bundle in which to find the entry
-     * @param key    key of bundle entry.
+     * @param key key of bundle entry.
      * @return bundle entry
      */
     public BundleEntry getBundleEntry(Locale locale, String key) {
@@ -251,10 +246,11 @@ public class BundleGroup implements IBundleVisitable {
      * @param key key of entries to retreive
      * @return a collection of <code>BundleEntry</code> objects
      */
-    public Collection getBundleEntries(String key) {
-        Collection entries = new ArrayList();
-        for (Iterator iter = bundles.keySet().iterator(); iter.hasNext(); ) {
-            Locale locale = (Locale) iter.next();
+    public Collection<BundleEntry> getBundleEntries(String key) {
+        Collection<BundleEntry> entries = new ArrayList<>();
+        for (Iterator<Locale> iter = bundles.keySet().iterator(); 
+                iter.hasNext();) {
+            Locale locale = iter.next();
             BundleEntry entry = getBundleEntry(locale, key);
             if (entry != null) {
                 entries.add(entry);
@@ -270,8 +266,9 @@ public class BundleGroup implements IBundleVisitable {
      * @return true <=> The key is already existing.
      */
     public boolean containsKey(String key) {
-        for (Iterator iter = bundles.keySet().iterator(); iter.hasNext(); ) {
-            Locale locale = (Locale) iter.next();
+        for (Iterator<Locale> iter = bundles.keySet().iterator(); 
+                iter.hasNext();) {
+            Locale locale = iter.next();
             BundleEntry entry = getBundleEntry(locale, key);
             if (entry != null) {
                 return (true);
@@ -294,7 +291,7 @@ public class BundleGroup implements IBundleVisitable {
      *
      * @return iterator.
      */
-    public Iterator iterator() {
+    public Iterator<Bundle> iterator() {
         return bundles.values().iterator();
     }
 
@@ -312,15 +309,13 @@ public class BundleGroup implements IBundleVisitable {
      *
      * @return <code>List</code> of resource bundle keys.
      */
-//    public Set getKeys() {
     private Set<String> refreshKeys() {
         //Set keys = new TreeSet();
         keys.clear();
-        for (Iterator iter = iterator(); iter.hasNext(); ) {
-            keys.addAll(((Bundle) iter.next()).getKeys());
+        for (Iterator<Bundle> iter = iterator(); iter.hasNext();) {
+            keys.addAll((iter.next()).getKeys());
         }
         return keys;
-//        return Collections.unmodifiableSet(keys);
     }
 
     /**
@@ -336,31 +331,25 @@ public class BundleGroup implements IBundleVisitable {
     public String getNextKey(String currentKey) {
         boolean returnNextKey = false;
         for (String key : keys) {
-            if (returnNextKey)
+            if (returnNextKey) {
                 return key;
-            if (key.equals(currentKey))
+            }
+            if (key.equals(currentKey)) {
                 returnNextKey = true;
+            }
         }
         return null;
-//		int index = keys.indexOf(key);
-//		if (index < keys.size()-1)
-//			return keys.get(++index);
-//		return null;
     }
 
     public String getPreviousKey(String currentKey) {
         String previousKey = null;
         for (String key : keys) {
-            if (key.equals(currentKey))
+            if (key.equals(currentKey)) {
                 return previousKey;
-
+            }
             previousKey = key;
         }
         return null;
-//		int index = keys.indexOf(key);
-//		if (index > 0)
-//			return keys.get(--index);
-//		return null;
     }
 
 }
