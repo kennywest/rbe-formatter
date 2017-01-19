@@ -1,21 +1,21 @@
 /*
  * Copyright (C) 2003, 2004  Pascal Essiembre, Essiembre Consultant Inc.
- * 
+ *
  * This file is part of Essiembre ResourceBundle Editor.
- * 
- * Essiembre ResourceBundle Editor is free software; you can redistribute it 
+ *
+ * Essiembre ResourceBundle Editor is free software; you can redistribute it
  * and/or modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
- * Essiembre ResourceBundle Editor is distributed in the hope that it will be 
+ *
+ * Essiembre ResourceBundle Editor is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with Essiembre ResourceBundle Editor; if not, write to the 
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * License along with Essiembre ResourceBundle Editor; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA  02111-1307  USA
  */
 package com.essiembre.eclipse.rbe.application.preferences;
@@ -32,7 +32,7 @@ public final class RBEPreferenceInitializer {
 
     public static void initializeDefaultPreferences() {
         //General
-        RBEPreferences.setDefault(RBEPreferences.CONVERT_ENCODED_TO_UNICODE, true);
+        RBEPreferences.setDefault(RBEPreferences.CONVERT_ENCODED_TO_UNICODE, false);
         RBEPreferences.setDefault(RBEPreferences.FIELD_TAB_INSERTS, true);
         RBEPreferences.setDefault(RBEPreferences.KEY_TREE_HIERARCHICAL, true);
         RBEPreferences.setDefault(RBEPreferences.KEY_TREE_EXPANDED, true);
@@ -40,7 +40,7 @@ public final class RBEPreferenceInitializer {
         RBEPreferences.setDefault(RBEPreferences.LOAD_ONLY_FRAGMENT_RESOURCES, false);
 
         //Formatting
-        RBEPreferences.setDefault(RBEPreferences.CONVERT_UNICODE_TO_ENCODED, true);
+        RBEPreferences.setDefault(RBEPreferences.CONVERT_UNICODE_TO_ENCODED, false);
         RBEPreferences.setDefault(RBEPreferences.CONVERT_UNICODE_TO_ENCODED_UPPER, true);
 
         RBEPreferences.setDefault(RBEPreferences.SPACES_AROUND_EQUAL_SIGNS, true);
@@ -51,7 +51,8 @@ public final class RBEPreferenceInitializer {
         RBEPreferences.setDefault(RBEPreferences.KEY_TREE_HIERARCHICAL, true);
 
         RBEPreferences.setDefault(RBEPreferences.GROUP_KEYS, true);
-        RBEPreferences.setDefault(RBEPreferences.GROUP_LEVEL_DEEP, 1);
+        RBEPreferences.setDefault(RBEPreferences.GROUP_LEVEL_DEEP_MAX, 4);
+        RBEPreferences.setDefault(RBEPreferences.GROUP_LEVEL_DEEP_MAX, 3);
         RBEPreferences.setDefault(RBEPreferences.GROUP_LINE_BREAKS, 1);
         RBEPreferences.setDefault(RBEPreferences.GROUP_ALIGN_EQUAL_SIGNS, true);
 

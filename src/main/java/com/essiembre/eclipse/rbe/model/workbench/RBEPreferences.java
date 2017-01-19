@@ -1,21 +1,21 @@
 /*
  * Copyright (C) 2003, 2004  Pascal Essiembre, Essiembre Consultant Inc.
- * 
+ *
  * This file is part of Essiembre ResourceBundle Editor.
- * 
- * Essiembre ResourceBundle Editor is free software; you can redistribute it 
+ *
+ * Essiembre ResourceBundle Editor is free software; you can redistribute it
  * and/or modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
- * Essiembre ResourceBundle Editor is distributed in the hope that it will be 
+ *
+ * Essiembre ResourceBundle Editor is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with Essiembre ResourceBundle Editor; if not, write to the 
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * License along with Essiembre ResourceBundle Editor; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA  02111-1307  USA
  */
 package com.essiembre.eclipse.rbe.model.workbench;
@@ -25,6 +25,7 @@ import java.util.Map;
 
 /**
  * Application preferences, relevant to the resource bundle editor plugin.
+ *
  * @author Pascal Essiembre (essiembre@users.sourceforge.net)
  * @version $Author: fleque $ $Revision: 1.5 $ $Date: 2007/09/15 15:14:03 $
  */
@@ -100,8 +101,12 @@ public enum RBEPreferences {
     /**
      * How many level deep should keys be grouped.
      */
-    public static final String GROUP_LEVEL_DEEP =
-            "groupLevelDeep"; //$NON-NLS-1$
+    public static final String GROUP_LEVEL_DEEP_MAX =
+            "groupLevelDeepMax"; //$NON-NLS-1$
+
+    public static final String GROUP_LEVEL_DEEP_MIN =
+            "groupLevelDeepMin"; //$NON-NLS-1$
+
     /**
      * How many line breaks between key groups.
      */
@@ -297,7 +302,11 @@ public enum RBEPreferences {
      * @return how many level deep
      */
     public static int getGroupLevelDeepness() {
-        return getInt(GROUP_LEVEL_DEEP);
+        return getInt(GROUP_LEVEL_DEEP_MAX);
+    }
+
+    public static int getMinGroupLevelDeepness() {
+        return getInt(GROUP_LEVEL_DEEP_MIN);
     }
 
     /**

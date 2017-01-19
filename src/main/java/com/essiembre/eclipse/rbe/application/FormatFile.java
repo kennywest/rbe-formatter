@@ -6,8 +6,15 @@ import com.essiembre.eclipse.rbe.model.bundle.PropertiesGenerator;
 import com.essiembre.eclipse.rbe.model.bundle.PropertiesParser;
 
 import java.io.BufferedReader;
-import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 
 /**
  * @author kw
@@ -19,9 +26,10 @@ public class FormatFile {
         RBEPreferenceInitializer.initializeDefaultPreferences();
         Bundle bundle = PropertiesParser.parse(readFile(args[0]));
 
-        FileOutputStream out = new FileOutputStream(args[0]);
-        out.write(PropertiesGenerator.generate(bundle).getBytes());
-        out.close();
+        Path out = Paths.get(args[0]);
+        List<String> lines = new ArrayList<>();
+        PropertiesGenerator.generate(bundle, lines::add);
+        Files.write(out, lines, StandardCharsets.UTF_8, TRUNCATE_EXISTING);
     }
 
     private static String readFile(String file) throws Exception {
