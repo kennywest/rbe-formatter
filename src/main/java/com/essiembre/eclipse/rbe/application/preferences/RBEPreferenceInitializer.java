@@ -53,6 +53,7 @@ public final class RBEPreferenceInitializer {
         RBEPreferences.setDefault(RBEPreferences.GROUP_KEYS, true);
         RBEPreferences.setDefault(RBEPreferences.GROUP_LEVEL_DEEP_MAX, 4);
         RBEPreferences.setDefault(RBEPreferences.GROUP_LEVEL_DEEP_MAX, 3);
+        RBEPreferences.setDefault(RBEPreferences.GROUP_LEVEL_DEEP_MIN, 3);
         RBEPreferences.setDefault(RBEPreferences.GROUP_LINE_BREAKS, 1);
         RBEPreferences.setDefault(RBEPreferences.GROUP_ALIGN_EQUAL_SIGNS, true);
 
